@@ -193,8 +193,8 @@ nnoremap <silent> <leader>r <C-[>:<C-u>silent NERDTreeFind<CR>
 nnoremap <silent> <leader>f <C-[>:<C-u>silent NERDTreeToggle<CR>
 nnoremap <leader>q :<C-u>qa<CR>
 
-" 粘贴相关，centos 没有 +/* 的寄存器
-set pastetoggle=<F2>
+" 粘贴相关，centos和当前的 macOS-10.13.6 没有 +/* 的寄存器
+set pastetoggle=<F2>  " vim --version | grep clipboard 查看是否支持 + 
 map <leader>t "+y
 vmap <leader>x "+ygvd
 map <leader>v "+p

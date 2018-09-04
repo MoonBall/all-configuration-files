@@ -31,6 +31,13 @@ File: com.googlecode.iterm2.plist.
 2. 选择底部 Load Preferences，并选中该文件夹。
 3. 勾选退出 iTerm2 后保存配置。
 
+> 需要安装 Source Code Pro 字体，其他字体中文可能会导致中文不友好。
+```
+brew tap caskroom/fonts && brew cask install font-source-code-pro
+```
+配置 iTerm2。Preferences -> Profiles -> Text -> Change Font -> Source Code Pro 14pt
+
+
 ## Node.js
 安装 [nvm](https://github.com/creationix/nvm)。
 执行 `nvm install {version}` 安装 node。

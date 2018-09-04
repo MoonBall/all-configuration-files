@@ -14,7 +14,7 @@ antigen bundle heroku
 antigen bundle pip
 antigen bundle lein
 antigen bundle command-not-found
-antigen bundle autojump
+antigen bundle autojump   # 可能需要 brew install autojump 代替
 
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
