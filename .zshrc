@@ -109,6 +109,29 @@ trash()
 export NVM_DIR=$HOME/.nvm
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# place this after nvm initialization!
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+# origin npm registry
+alias onpm="npm --registry=https://registry.npmjs.org"
 
 # jenv
 export PATH="$PATH:$HOME/.jenv/bin"
@@ -139,14 +162,43 @@ export PATH=$PATH:$HOME/GreenApplications/platform-tools
 # VS CODE
 export PATH=$PATH:/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/Resources/app/bin
 
+# Go
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$(go env GOPATH)
+export PATH=$PATH:$GOPATH/bin
+
 # pyenv 命令： git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
 
 alias my-openssl='/usr/local/Cellar/openssl/1.0.2o_2/bin/openssl'
 
 # git 切换用户
 alias git-hb='git config user.email "gangc.cxy@foxmail.com" && git config user.name "Chen Gang"'
-alias beta-pub-direct='git checkout - && git commit -am "..." && git checkout - && git merge - -m "merge -" && gulp newtest'
+alias pm2='/Users/moonball/ByteDance/ee-people-fe/people-fe/people-node/node_modules/.bin/pm2'
 
+__cloneSource() {
+  local sourceBase=~/open-source
+  local url=$1
+  local sourcePath
+  if [[ $url =~ ^git@([^:]*):(.*).git$ ]]; then
+    sourcePath=${match[1]}/${match[2]}
+  elif [[ $url =~ ^https://(.*).git$ ]]; then
+    sourcePath=${match[1]}
+  else
+    echo "不支持的 repository url。"
+    return 1
+  fi
+
+  local sourceDist=$sourceBase/$sourcePath
+  git clone $url $sourceDist
+
+  # 如果仓库已经被克隆了，直接 cd 到仓库目录里
+  local exitCode=$?
+  cd $sourceDist
+  if [ $exitCode -ne 0 ]; then
+    return $exitCode
+  fi
+}
+alias clone-source="__cloneSource"
