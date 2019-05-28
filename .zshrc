@@ -184,14 +184,22 @@ __cloneSource() {
   local sourcePath
   if [[ $url =~ ^git@([^:]*):(.*).git$ ]]; then
     sourcePath=${match[1]}/${match[2]}
-  elif [[ $url =~ ^https://(.*).git$ ]]; then
-    sourcePath=${match[1]}
+  elif [[ $url =~ ^git@([^:]*):(.*)$ ]]; then
+    sourcePath=${match[1]}/${match[2]}
+  elif [[ $url =~ ^https?://([^/]*)/(.*).git$ ]]; then
+    # 使用 git 协议，不用输入密码
+    url=git@${match[1]}:${match[2]}
+    sourcePath=${match[1]}/${match[2]}
+  elif [[ $url =~ ^https?://([^/]*)/(.*)$ ]]; then
+    url=git@${match[1]}:${match[2]}
+    sourcePath=${match[1]}/${match[2]}
   else
     echo "不支持的 repository url。"
     return 1
   fi
 
   local sourceDist=$sourceBase/$sourcePath
+  echo "git clone $url $sourceDist"
   git clone $url $sourceDist
 
   # 如果仓库已经被克隆了，直接 cd 到仓库目录里
