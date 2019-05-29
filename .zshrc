@@ -178,6 +178,9 @@ alias my-openssl='/usr/local/Cellar/openssl/1.0.2o_2/bin/openssl'
 alias git-hb='git config user.email "gangc.cxy@foxmail.com" && git config user.name "Chen Gang"'
 alias pm2='/Users/moonball/ByteDance/ee-people-fe/people-fe/people-node/node_modules/.bin/pm2'
 
+# vscode 编辑器
+alias vscode='/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
+
 __cloneSource() {
   local sourceBase=~/open-source
   local url=$1
