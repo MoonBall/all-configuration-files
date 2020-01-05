@@ -22,6 +22,7 @@ ln -s "`pwd`/.vimrc" ~/.vimrc
 ```
 ln -sf "`pwd`/.zshrc" ~/.zshrc
 source ~/.zshrc
+chsh -s /bin/zsh
 ```
 
 ## iTerm2
@@ -33,7 +34,7 @@ File: com.googlecode.iterm2.plist.
 
 > 需要安装 Source Code Pro 字体，其他字体中文可能会导致中文不友好。
 ```
-brew tap caskroom/fonts && brew cask install font-source-code-pro
+brew tap homebrew/cask-fonts && brew cask install font-source-code-pro
 ```
 配置 iTerm2。Preferences -> Profiles -> Text -> Change Font -> Source Code Pro 14pt
 

@@ -164,7 +164,7 @@ export PATH=$PATH:/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/R
 
 # Go
 export PATH=$PATH:/usr/local/go/bin
-export GOPATH=$(go env GOPATH)
+which go && export GOPATH=$(go env GOPATH)
 export PATH=$PATH:$GOPATH/bin
 
 # pyenv 命令： git clone https://github.com/pyenv/pyenv.git ~/.pyenv
