@@ -12,7 +12,7 @@ cd all-configuration-files/
 File: .vimrc
 
 ```
-ln -s "`pwd`/.vimrc" ~/.vimrc
+ln -sf "`pwd`/.vimrc" ~/.vimrc
 ```
 
 ## Zsh
@@ -29,7 +29,7 @@ chsh -s /bin/zsh
 File: .gitconfig
 
 ```
-ln -s "`pwd`/.gitconfig" ~/.gitconfig
+ln -sf "`pwd`/.gitconfig" ~/.gitconfig
 ```
 
 ## iTerm2
