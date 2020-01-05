@@ -183,7 +183,7 @@ alias pm2='/Users/moonball/ByteDance/ee-people-fe/people-fe/people-node/node_mod
 alias vscode='/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
 
 __cloneSource() {
-  local sourceBase=~/open-source
+  local sourceBase=~/git-source
   local url=$1
   local sourcePath
   if [[ $url =~ ^git@([^:]*):(.*).git$ ]]; then
