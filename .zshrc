@@ -104,6 +104,7 @@ trash()
 {
     mv $@ ~/.trash/
 }
+alias rm-be-careful=/bin/rm
 
 # This loads nvm
 export NVM_DIR=$HOME/.nvm

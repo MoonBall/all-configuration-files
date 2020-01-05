@@ -25,6 +25,13 @@ source ~/.zshrc
 chsh -s /bin/zsh
 ```
 
+## Git
+File: .gitconfig
+
+```
+ln -s "`pwd`/.gitconfig" ~/.gitconfig
+```
+
 ## iTerm2
 File: com.googlecode.iterm2.plist.
 
