@@ -26,10 +26,11 @@ chsh -s /bin/zsh
 ```
 
 ## Git
-File: .gitconfig
+File: .gitconfig, .gitignore_global
 
 ```
 ln -sf "`pwd`/.gitconfig" ~/.gitconfig
+ln -sf "`pwd`/.gitignore_global" ~/.gitignore_global
 ```
 
 ## iTerm2

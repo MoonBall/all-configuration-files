@@ -1,2 +1,4 @@
 [core]
   pager = less -FRX
+  excludesfile = ~/.gitignore_global
+
