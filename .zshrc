@@ -168,10 +168,15 @@ export PATH=$PATH:/usr/local/go/bin
 which go > /dev/null 2>&1 && export GOPATH=$(go env GOPATH)
 export PATH=$PATH:$GOPATH/bin
 
-# pyenv 命令： git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-# export PYENV_ROOT="$HOME/.pyenv"
-# export PATH="$PYENV_ROOT/bin:$PATH"
-# if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
+# pyenv 命令：https://github.com/pyenv/pyenv#basic-github-checkout
+# 使用 brew install pyenv 后，会报 openssl 不兼容错误。
+# 因为如果 brew install openssl 后，pyenv install 时会使用 brew 中的 openssl，而 brew install 的 openssl 可能有问题。
+if [ ! -d "$HOME/.pyenv" ]; then git clone https://github.com/pyenv/pyenv.git ~/.pyenv; fi
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
+# http://yyuu.github.io/pythons/ 加速下载 python
+export PYTHON_BUILD_MIRROR_URL="http://yoursite.example.com/pythons"
 
 alias my-openssl='/usr/local/Cellar/openssl/1.0.2o_2/bin/openssl'
 
@@ -214,3 +219,5 @@ __cloneSource() {
   fi
 }
 alias clone-source="__cloneSource"
+
+alias proxy_lantern="export HTTP_PROXY=http://127.0.0.1:56356 HTTPS_PROXY=http://127.0.0.1:56356"
