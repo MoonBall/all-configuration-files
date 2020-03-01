@@ -1267,7 +1267,7 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>425 1398 620 392 -225 900 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>27 81 1370 770 0 0 1440 877 </string>
+	<string>27 95 1365 756 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -4509,9 +4509,9 @@
 	<key>NoSyncInstallationId</key>
 	<string>6CD155A6-87F5-4F8B-9FA0-0F91011CBA9F</string>
 	<key>NoSyncLastTipTime</key>
-	<real>601356491.09466398</real>
+	<real>602840097.54534602</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>17</integer>
+	<integer>20</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
 	<real>600402805.389346</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
@@ -5228,16 +5228,22 @@
 	<real>599907013.50446105</real>
 	<key>NoSyncTipsToNotShow</key>
 	<array>
-		<string>0006</string>
-		<string>0003</string>
-		<string>0000</string>
-		<string>0007</string>
 		<string>0004</string>
-		<string>0001</string>
-		<string>000</string>
-		<string>0005</string>
+		<string>0000</string>
+		<string>0010</string>
+		<string>0007</string>
+		<string>0003</string>
+		<string>0013</string>
+		<string>0006</string>
 		<string>0002</string>
+		<string>000</string>
+		<string>0012</string>
+		<string>0009</string>
+		<string>0005</string>
+		<string>0001</string>
+		<string>0011</string>
 		<string>0008</string>
+		<string>0014</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
@@ -5297,9 +5303,9 @@
 	<key>PromptOnQuit</key>
 	<true/>
 	<key>QuickPasteBytesPerCall</key>
-	<integer>3384</integer>
+	<integer>11421</integer>
 	<key>QuickPasteDelayBetweenCalls</key>
-	<real>0.0030231226701289415</real>
+	<real>0.0010000000474974513</real>
 	<key>QuitWhenAllWindowsClosed</key>
 	<false/>
 	<key>RightCommand</key>
@@ -5315,7 +5321,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-01-23T02:19:09Z</date>
+	<date>2020-02-08T07:32:34Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>

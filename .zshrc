@@ -202,6 +202,8 @@ __cloneSource() {
   elif [[ $url =~ ^https?://([^/]*)/(.*)$ ]]; then
     url=git@${match[1]}:${match[2]}
     sourcePath=${match[1]}/${match[2]}
+  elif [[ $url =~ ^ssh://[^@]+@([^/:]+)[^/]*/(.*)$ ]]; then
+    sourcePath=${match[1]}/${match[2]}
   else
     echo "不支持的 repository url。"
     return 1
