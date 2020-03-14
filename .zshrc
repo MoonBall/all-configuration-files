@@ -171,7 +171,7 @@ export PATH=$PATH:$GOPATH/bin
 # pyenv 命令：https://github.com/pyenv/pyenv#basic-github-checkout
 # 使用 brew install pyenv 后，会报 openssl 不兼容错误。
 # 因为如果 brew install openssl 后，pyenv install 时会使用 brew 中的 openssl，而 brew install 的 openssl 可能有问题。
-if [ ! -d "$HOME/.pyenv" ]; then git clone https://github.com/pyenv/pyenv.git ~/.pyenv; fi
+if [ ! -d "$HOME/.pyenv" ]; then git clone --depth 1 https://github.com/pyenv/pyenv.git ~/.pyenv; fi
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
