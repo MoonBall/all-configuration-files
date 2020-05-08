@@ -223,3 +223,7 @@ __cloneSource() {
 alias clone-source="__cloneSource"
 
 alias proxy_lantern="export HTTP_PROXY=http://127.0.0.1:56356 HTTPS_PROXY=http://127.0.0.1:56356"
+
+export GEM_HOME=$HOME/.gem
+export PATH=$GEM_HOME/bin:$PATH
+
