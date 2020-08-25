@@ -222,8 +222,43 @@ __cloneSource() {
 }
 alias clone-source="__cloneSource"
 
+__gitSeeBranch() {
+  local url=$1
+  local remoteName
+  local branchName
+  local repositoryName
+  local remoteUrlPrefix
+  if [[ $url =~ ^([^:]*):(.*)$ ]]; then
+    remoteName=${match[1]}
+    branchName=${match[2]}
+  else
+    echo "不支持的的分支。请使用 {remoteName}:{branchName}"
+    return 1
+  fi
+
+  echo "${remoteName} ${branchName}"
+
+  local existRemoteUrl=`git remote -v | grep -oE "((git@[^:]*):([^/]*)/(.*).git)" | head -n1`
+  if [[ $existRemoteUrl =~ ^((git@[^:]*):([^/]*)/(.*).git)$ ]]; then
+    remoteUrlPrefix=${match[2]}
+    repositoryName=${match[4]}
+  else
+    echo "没有找到 git@ 相似的 remote"
+    return 1
+  fi
+
+  local newUrl="${remoteUrlPrefix}:${remoteName}/${repositoryName}.git"
+  echo "$ git remote add ${remoteName} ${newUrl}\n"
+  git remote add $remoteName $newUrl 1>/dev/null 2>&1
+  echo "$ git remote fetch ${remoteName}\n"
+  git fetch $remoteName
+  echo "$ git checkout ${branchName}\n"
+  git checkout $branchName
+}
+alias git-hbr="__gitSeeBranch"
+
 alias proxy_lantern="export HTTP_PROXY=http://127.0.0.1:56356 HTTPS_PROXY=http://127.0.0.1:56356"
 
 export GEM_HOME=$HOME/.gem
-export PATH=$GEM_HOME/bin:$PATH
+export PATH=/Users/chengang.07/.gem/ruby/2.6.0/bin:$GEM_HOME/bin:$PATH
 
