@@ -236,8 +236,6 @@ __gitSeeBranch() {
     return 1
   fi
 
-  echo "${remoteName} ${branchName}"
-
   local existRemoteUrl=`git remote -v | grep -oE "((git@[^:]*):([^/]*)/(.*).git)" | head -n1`
   if [[ $existRemoteUrl =~ ^((git@[^:]*):([^/]*)/(.*).git)$ ]]; then
     remoteUrlPrefix=${match[2]}
@@ -250,10 +248,10 @@ __gitSeeBranch() {
   local newUrl="${remoteUrlPrefix}:${remoteName}/${repositoryName}.git"
   echo "$ git remote add ${remoteName} ${newUrl}\n"
   git remote add $remoteName $newUrl 1>/dev/null 2>&1
-  echo "$ git remote fetch ${remoteName}\n"
-  git fetch $remoteName
-  echo "$ git checkout ${branchName}\n"
-  git checkout $branchName
+  echo "$ git fetch ${remoteName} ${branchName}\n"
+  git fetch $remoteName $branchName
+  echo "$ git checkout -b $branchName -t ${remoteName}/${branchName}\n"
+  git checkout -b $branchName -t ${remoteName}/${branchName}
 }
 alias git-hbr="__gitSeeBranch"
 
