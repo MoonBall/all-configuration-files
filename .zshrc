@@ -181,7 +181,7 @@ export PYTHON_BUILD_MIRROR_URL="http://yoursite.example.com/pythons"
 alias my-openssl='/usr/local/Cellar/openssl/1.0.2o_2/bin/openssl'
 
 # git 切换用户
-alias git-hb='git config user.email "gangc.cxy@foxmail.com" && git config user.name "Chen Gang"'
+alias git-hb='git config user.email "gangc.cxy@foxmail.com" && git config user.name "Gang Chen"'
 alias pm2='/Users/moonball/ByteDance/ee-people-fe/people-fe/people-node/node_modules/.bin/pm2'
 
 # vscode 编辑器
