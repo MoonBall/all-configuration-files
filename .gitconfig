@@ -11,3 +11,10 @@
 
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[submodule]
+	recurse = false
+[alias]
+        # https://git-scm.com/book/en/v2/Git-Tools-Submodules#Useful-Aliases
+	sdiff = !git diff && git submodule foreach 'git diff'
+	spush = push --recurse-submodules=on-demand
+	supdate = submodule update --remote --merge

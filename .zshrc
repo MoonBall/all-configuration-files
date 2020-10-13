@@ -134,6 +134,9 @@ load-nvmrc
 # origin npm registry
 alias onpm="npm --registry=https://registry.npmjs.org"
 
+# 先使用 brew 中的命令
+export PATH="/usr/local/bin:$PATH"
+
 # jenv
 export PATH="$PATH:$HOME/.jenv/bin"
 type jenv >/dev/null 2>&1 && eval "$(jenv init -)"
