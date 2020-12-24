@@ -219,6 +219,13 @@ __cloneSource() {
   # 如果仓库已经被克隆了，直接 cd 到仓库目录里
   local exitCode=$?
   cd $sourceDist
+
+  # 设置 github 账号，避免使用公司账号
+  if [[ $sourcePath =~ "github.com" ]]; then
+    echo "exec git-hb"
+    git-hb
+  fi
+
   if [ $exitCode -ne 0 ]; then
     return $exitCode
   fi

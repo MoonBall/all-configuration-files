@@ -1,18 +1,19 @@
 [core]
-  pager = less -FRX
-	excludesfile = /Users/chengang.07/.gitignore_global
+        pager = less -FRX
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+
 [submodule]
 	recurse = false
+
 [alias]
         # https://git-scm.com/book/en/v2/Git-Tools-Submodules#Useful-Aliases
 	sdiff = !git diff && git submodule foreach 'git diff'
