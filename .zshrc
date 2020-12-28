@@ -171,6 +171,9 @@ export PATH=$PATH:/usr/local/go/bin
 which go > /dev/null 2>&1 && export GOPATH=$(go env GOPATH)
 export PATH=$PATH:$GOPATH/bin
 
+# Postgres.app
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
+
 # pyenv 命令：https://github.com/pyenv/pyenv#basic-github-checkout
 # 使用 brew install pyenv 后，会报 openssl 不兼容错误。
 # 因为如果 brew install openssl 后，pyenv install 时会使用 brew 中的 openssl，而 brew install 的 openssl 可能有问题。
