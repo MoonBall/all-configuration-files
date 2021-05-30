@@ -167,9 +167,15 @@ export PATH=$PATH:$HOME/GreenApplications/platform-tools
 export PATH=$PATH:/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/Resources/app/bin
 
 # Go
-export PATH=$PATH:/usr/local/go/bin
-which go > /dev/null 2>&1 && export GOPATH=$(go env GOPATH)
+# https://stackoverflow.com/questions/12843063/install-go-with-brew-and-running-the-gotour
+# 安装指定版本的 Go。brew install go@1.16 
+# 如果需要配置镜像：https://mirror.tuna.tsinghua.edu.cn/help/homebrew/
+export GOPATH=$HOME/Go
+export GOROOT="$(brew --prefix golang)/libexec"
 export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+test -d "${GOPATH}" || mkdir "${GOPATH}"
+test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
 
 # Postgres.app
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
