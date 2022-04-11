@@ -3,3 +3,8 @@
 
 node_modules
 
+.idea
+
+# CLion 中配置的自定义的 Tool Chain
+cmake-build-debug-cc-and-c
+

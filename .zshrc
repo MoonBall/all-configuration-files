@@ -95,6 +95,20 @@ antigen apply
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=black,bold"
 
+# https://github.com/zsh-users/zsh-autosuggestions/issues/276#issuecomment-625029877
+### Fix slowness of pastes with zsh-syntax-highlighting.zsh
+pasteinit() {
+  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+  zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+}
+
+pastefinish() {
+  zle -N self-insert $OLD_SELF_INSERT
+}
+zstyle :bracketed-paste-magic paste-init pasteinit
+zstyle :bracketed-paste-magic paste-finish pastefinish
+### Fix slowness of pastes
+
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 # don't rm
@@ -106,31 +120,43 @@ trash()
 }
 alias rm-be-careful=/bin/rm
 
-# This loads nvm
-export NVM_DIR=$HOME/.nvm
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-# place this after nvm initialization!
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
+# https://stackoverflow.com/questions/66162058/vscode-complains-that-resolving-my-environment-takes-too-long
+# for vscode start from docker
+function load-nvm {
+  # This loads nvm
+  export NVM_DIR=$HOME/.nvm
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  # place this after nvm initialization!
+  autoload -U add-zsh-hook
+  load-nvmrc() {
+    local node_version="$(nvm version)"
+    local nvmrc_path="$(nvm_find_nvmrc)"
 
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+    if [ -n "$nvmrc_path" ]; then
+      local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
 
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
+      if [ "$nvmrc_node_version" = "N/A" ]; then
+        nvm install
+      elif [ "$nvmrc_node_version" != "$node_version" ]; then
+        nvm use
+      fi
+    elif [ "$node_version" != "$(nvm version default)" ]; then
+      echo "Reverting to nvm default version"
+      nvm use default
     fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
+  }
+  add-zsh-hook chpwd load-nvmrc
+  load-nvmrc
 }
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+if [[ "x${TERM_PROGRAM}" = "xvscode" ]]; then 
+  load-nvm
+  # 现在又不复现问题了，所以直接执行 load-nvm
+  # echo 'in vscode, nvm not work; use `load-nvm`';
+else 
+  load-nvm
+fi
+
 # origin npm registry
 alias onpm="npm --registry=https://registry.npmjs.org"
 
@@ -285,3 +311,13 @@ alias proxy_lantern="export HTTP_PROXY=http://127.0.0.1:56356 HTTPS_PROXY=http:/
 export GEM_HOME=$HOME/.gem
 export PATH=/Users/chengang.07/.gem/ruby/2.6.0/bin:$GEM_HOME/bin:$PATH
 
+export PATH=~/git-source/chromium.googlesource.com/chromium/tools/depot_tools:$PATH
+
+
+# Node.js 加速构建，需先 brew install ccache
+# https://github.com/nodejs/node/blob/master/BUILDING.md#speeding-up-frequent-rebuilds-when-developing
+export CC="ccache cc"    # add to ~/.zshrc or other shell config file
+export CXX="ccache c++"  # add to ~/.zshrc or other shell config file
+
+# Flutter
+export PATH=$PATH:/Applications/flutter/bin
