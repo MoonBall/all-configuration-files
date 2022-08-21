@@ -316,8 +316,18 @@ export PATH=~/git-source/chromium.googlesource.com/chromium/tools/depot_tools:$P
 
 # Node.js 加速构建，需先 brew install ccache
 # https://github.com/nodejs/node/blob/master/BUILDING.md#speeding-up-frequent-rebuilds-when-developing
-export CC="ccache cc"    # add to ~/.zshrc or other shell config file
-export CXX="ccache c++"  # add to ~/.zshrc or other shell config file
+# export CC="ccache cc"    # add to ~/.zshrc or other shell config file
+# export CXX="ccache c++"  # add to ~/.zshrc or other shell config file
 
 # Flutter
 export PATH=$PATH:/Applications/flutter/bin
+
+# google cloud cli
+export PATH=$PATH:/Applications/google-cloud-sdk/bin
+
+# tosapi storage/tos 启动 server_start_test.go 时报错
+export GOLANG_PROTOBUF_REGISTRATION_CONFLICT=warn
+
+# bit
+export PATH=$HOME/bin:$PATH
+
