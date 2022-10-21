@@ -142,10 +142,12 @@ function load-nvm {
         nvm use
       fi
     elif [ "$node_version" != "$(nvm version default)" ]; then
-      echo "Reverting to nvm default version"
-      nvm use default
+      # not change to default, if there is no .nvmrc
+      # echo "Reverting to nvm default version"
+      # nvm use default
     fi
   }
+
   add-zsh-hook chpwd load-nvmrc
   load-nvmrc
 }
@@ -311,7 +313,7 @@ alias proxy_lantern="export HTTP_PROXY=http://127.0.0.1:56356 HTTPS_PROXY=http:/
 export GEM_HOME=$HOME/.gem
 export PATH=/Users/chengang.07/.gem/ruby/2.6.0/bin:$GEM_HOME/bin:$PATH
 
-export PATH=~/git-source/chromium.googlesource.com/chromium/tools/depot_tools:$PATH
+export PATH=~/git-source/chromium.googlesource.com/depot_tools:$PATH
 
 
 # Node.js 加速构建，需先 brew install ccache
