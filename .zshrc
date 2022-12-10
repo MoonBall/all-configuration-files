@@ -195,28 +195,22 @@ export PATH=$PATH:$HOME/GreenApplications/platform-tools
 export PATH=$PATH:/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/Resources/app/bin
 
 # Go
-# https://stackoverflow.com/questions/12843063/install-go-with-brew-and-running-the-gotour
-# 安装指定版本的 Go。brew install go@1.16 
-# 如果需要配置镜像：https://mirror.tuna.tsinghua.edu.cn/help/homebrew/
-export GOPATH=$HOME/Go
-export GOROOT="$(brew --prefix golang)/libexec"
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
-test -d "${GOPATH}" || mkdir "${GOPATH}"
-test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
+# https://github.com/moovweb/gvm
+# gvm install go1.16.15
+# gvm use go1.16.15 --default
+source $HOME/.gvm/scripts/gvm
+# export GOPATH=$HOME/go
+export PATH=$PATH:$(go env GOPATH)/bin
+# 需要设置 GoLand 的 GOROOT 和 GOPATH 值
 
 # Postgres.app
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 
-# pyenv 命令：https://github.com/pyenv/pyenv#basic-github-checkout
-# 使用 brew install pyenv 后，会报 openssl 不兼容错误。
-# 因为如果 brew install openssl 后，pyenv install 时会使用 brew 中的 openssl，而 brew install 的 openssl 可能有问题。
-if [ ! -d "$HOME/.pyenv" ]; then git clone --depth 1 https://github.com/pyenv/pyenv.git ~/.pyenv; fi
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
-# http://yyuu.github.io/pythons/ 加速下载 python
-export PYTHON_BUILD_MIRROR_URL="http://yoursite.example.com/pythons"
+# pyenv 使用 homebrew 安装
+# https://github.com/pyenv/pyenv#homebrew-in-macos
+#https://github.com/pyenv/pyenv-virtualenv
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 alias my-openssl='/usr/local/Cellar/openssl/1.0.2o_2/bin/openssl'
 
@@ -246,7 +240,11 @@ __cloneSource() {
     url=git@${match[1]}:${match[2]}
     sourcePath=${match[1]}/${match[2]}
   elif [[ $url =~ ^https?://([^/]*)/(.*)$ ]]; then
-    url=git@${match[1]}:${match[2]}
+    # chromium 无需修改
+    if [[ ! $url == *"chromium"* ]]; then
+      url=git@${match[1]}:${match[2]}
+    fi
+
     sourcePath=${match[1]}/${match[2]}
   elif [[ $url =~ ^ssh://[^@]+@([^/:]+)[^/]*/(.*)$ ]]; then
     sourcePath=${match[1]}/${match[2]}
@@ -332,4 +330,11 @@ export GOLANG_PROTOBUF_REGISTRATION_CONFLICT=warn
 
 # bit
 export PATH=$HOME/bin:$PATH
+
+
+
+# rz/sz
+# https://lxb.wiki/32451f0a/
+
+
 
