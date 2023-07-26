@@ -51,7 +51,7 @@ File: com.googlecode.iterm2.plist.
 > 需要安装 Source Code Pro 字体，其他字体中文可能会导致中文不友好。
 
 ```
-brew tap homebrew/cask-fonts && brew cask install font-source-code-pro
+brew tap homebrew/cask-fonts && brew install font-source-code-pro --cask
 ```
 
 配置 iTerm2。Preferences -> Profiles -> Text -> Change Font -> Source Code Pro 14pt
@@ -60,3 +60,14 @@ brew tap homebrew/cask-fonts && brew cask install font-source-code-pro
 
 安装 [nvm](https://github.com/creationix/nvm)。
 执行 `nvm install {version}` 安装 node。
+
+
+## Go
+
+1. 安装 [gvm](https://github.com/moovweb/gvm)
+2. 安装最新版本的 Go，`brew install go`。因为 gvm 依赖 Go
+3. 执行 `gvm listall` 查看所有可用的 Go 版本
+4. 执行 `gvm install {version}` 安装指定版本的 Go
+5. 卸载 homebrew 安装的 Go，`brew uninstall go`
+6. 设置刚刚 gvm 安装的 go 为默认的 go 版本，`gvm alias create default {version}`
+

@@ -95,6 +95,9 @@ antigen apply
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=black,bold"
 
+# brew install autojump 后的设置
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+
 # https://github.com/zsh-users/zsh-autosuggestions/issues/276#issuecomment-625029877
 ### Fix slowness of pastes with zsh-syntax-highlighting.zsh
 pasteinit() {
@@ -163,7 +166,7 @@ fi
 alias onpm="npm --registry=https://registry.npmjs.org"
 
 # 先使用 brew 中的命令
-export PATH="/usr/local/bin:$PATH"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # jenv
 export PATH="$PATH:$HOME/.jenv/bin"
