@@ -290,10 +290,15 @@ __gitSeeBranch() {
     return 1
   fi
 
-  local existRemoteUrl=`git remote -v | grep -oE "((git@[^:]*):([^/]*)/(.*).git)" | head -n1`
-  if [[ $existRemoteUrl =~ ^((git@[^:]*):([^/]*)/(.*).git)$ ]]; then
-    remoteUrlPrefix=${match[2]}
-    repositoryName=${match[4]}
+  local gitRe='(git@[^:]*):([^/]*)/(\S+)'
+  local existRemoteUrl=`git remote -v | grep -oE $gitRe | head -n1`
+
+  if [[ $existRemoteUrl =~ ^(git@[^:]*):([^/]*)/(\S+).git$ ]]; then
+    remoteUrlPrefix=${match[1]}
+    repositoryName=${match[3]}
+  elif [[ $existRemoteUrl =~ ^(git@[^:]*):([^/]*)/(\S+)$ ]]; then
+    remoteUrlPrefix=${match[1]}
+    repositoryName=${match[3]}
   else
     echo "没有找到 git@ 相似的 remote"
     return 1
