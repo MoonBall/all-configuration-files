@@ -222,7 +222,7 @@ alias git-hb='__gitHb'
 alias pm2='/Users/moonball/ByteDance/ee-people-fe/people-fe/people-node/node_modules/.bin/pm2'
 
 # vscode 编辑器
-alias vscode='/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
+alias code='/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
 
 # 在函数中使用 alias 会有问题，所以提供函数，以便在函数中使用
 # https://stackoverflow.com/questions/45601589/zsh-not-recognizing-alias-from-within-function
