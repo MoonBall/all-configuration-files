@@ -350,6 +350,7 @@ export PATH=$HOME/bin:$PATH
 # Rust
 export RUSTUP_DIST_SERVER="https://rsproxy.cn"
 export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
+[ -f $HOME/.cargo/env ] && source "$HOME/.cargo/env"
 
 
 # 允许执行公司内的一些特殊配置
