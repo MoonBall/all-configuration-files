@@ -205,6 +205,9 @@ source $HOME/.gvm/scripts/gvm
 # export GOPATH=$HOME/go
 export PATH=$PATH:$(go env GOPATH)/bin
 # 需要设置 GoLand 的 GOROOT 和 GOPATH 值
+# -
+# goland command line
+export PATH=$PATH:/Applications/GoLand.app/Contents/MacOS
 
 # Postgres.app
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
@@ -344,5 +347,10 @@ export PATH=$HOME/bin:$PATH
 # rz/sz
 # https://lxb.wiki/32451f0a/
 
+# Rust
+export RUSTUP_DIST_SERVER="https://rsproxy.cn"
+export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 
 
+# 允许执行公司内的一些特殊配置
+[ -f ~/.company-inner.sh ] && . ~/.company-inner.sh

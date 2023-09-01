@@ -71,3 +71,15 @@ brew tap homebrew/cask-fonts && brew install font-source-code-pro --cask
 5. 卸载 homebrew 安装的 Go，`brew uninstall go`
 6. 设置刚刚 gvm 安装的 go 为默认的 go 版本，`gvm alias create default {version}`
 
+# Rust
+
+```
+mkdir -p ~/.cargo
+ln -sf "`pwd`/.cargo/config" ~/.cargo/config
+curl --proto '=https' --tlsv1.2 -sSf https://rsproxy.cn/rustup-init.sh | sh
+
+source "$HOME/.cargo/env"
+```
+
+
+

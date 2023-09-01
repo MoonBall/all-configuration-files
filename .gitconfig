@@ -24,3 +24,5 @@
 	supdate = submodule update --remote --merge
 [url "https://"]
 	insteadOf = git://
+[url "ssh://"]
+	insteadOf = https://
