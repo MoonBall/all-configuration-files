@@ -81,5 +81,12 @@ curl --proto '=https' --tlsv1.2 -sSf https://rsproxy.cn/rustup-init.sh | sh
 source "$HOME/.cargo/env"
 ```
 
+# JetBrains
+
+## 快捷键设置
+
+1. Alt + 1, Other -> Bookmarks -> Select File in Project View
+2. Alt + 2, Pin Active Tab
+3. Alt + 3, Close All but Pinned
 
 
