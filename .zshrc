@@ -177,6 +177,8 @@ export PATH=$PATH:$HOME/.rvm/bin
 
 # android
 export ANDROID_HOME=$HOME/Library/Android/sdk
+# emulator 放在前面。使用 emulator/emulator 而不是 tools/emulator 
+export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
@@ -212,17 +214,24 @@ export PATH=$PATH:/Applications/GoLand.app/Contents/MacOS
 # Postgres.app
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 
+# Python
 # pyenv 使用 homebrew 安装
 # https://github.com/pyenv/pyenv#homebrew-in-macos
-#https://github.com/pyenv/pyenv-virtualenv
+# https://github.com/pyenv/pyenv-virtualenv
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+
+# Java
+# jenv
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+# brew install java
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
 alias my-openssl='/usr/local/Cellar/openssl/1.0.2o_2/bin/openssl'
 
 # git 切换用户
 alias git-hb='__gitHb'
-alias pm2='/Users/moonball/ByteDance/ee-people-fe/people-fe/people-node/node_modules/.bin/pm2'
 
 # vscode 编辑器
 alias code='/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
@@ -296,10 +305,10 @@ __gitSeeBranch() {
   local gitRe='(git@[^:]*):([^/]*)/(\S+)'
   local existRemoteUrl=`git remote -v | grep -oE $gitRe | head -n1`
 
-  if [[ $existRemoteUrl =~ ^(git@[^:]*):([^/]*)/(\S+).git$ ]]; then
+  if [[ $existRemoteUrl =~ ^(git@[^:]*):([^/]*)/(.+).git$ ]]; then
     remoteUrlPrefix=${match[1]}
     repositoryName=${match[3]}
-  elif [[ $existRemoteUrl =~ ^(git@[^:]*):([^/]*)/(\S+)$ ]]; then
+  elif [[ $existRemoteUrl =~ ^(git@[^:]*):([^/]*)/(.+)$ ]]; then
     remoteUrlPrefix=${match[1]}
     repositoryName=${match[3]}
   else
@@ -307,7 +316,7 @@ __gitSeeBranch() {
     return 1
   fi
 
-  local newUrl="${remoteUrlPrefix}:${remoteName}/${repositoryName}.git"
+  local newUrl="${remoteUrlPrefix}:${remoteName}/${repositoryName}"
   echo "$ git remote add ${remoteName} ${newUrl}\n"
   git remote add $remoteName $newUrl 1>/dev/null 2>&1
   echo "$ git fetch ${remoteName} ${branchName}\n"
@@ -342,6 +351,9 @@ export GOLANG_PROTOBUF_REGISTRATION_CONFLICT=warn
 # bit
 export PATH=$HOME/bin:$PATH
 
+# emsdk: https://emscripten.org/docs/getting_started/downloads.html
+export EMSDK_QUIET=1
+source $HOME/git-source/github.com/emscripten-core/emsdk/emsdk_env.sh
 
 
 # rz/sz
@@ -350,8 +362,11 @@ export PATH=$HOME/bin:$PATH
 # Rust
 export RUSTUP_DIST_SERVER="https://rsproxy.cn"
 export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
+# 安装 Cargo: https://doc.rust-lang.org/cargo/getting-started/installation.html
+# curl https://sh.rustup.rs -sSf | sh
 [ -f $HOME/.cargo/env ] && source "$HOME/.cargo/env"
 
 
 # 允许执行公司内的一些特殊配置
 [ -f ~/.company-inner.sh ] && . ~/.company-inner.sh
+
