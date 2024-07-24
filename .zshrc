@@ -166,7 +166,7 @@ fi
 alias onpm="npm --registry=https://registry.npmjs.org"
 
 # 先使用 brew 中的命令
-eval "$(/opt/homebrew/bin/brew shellenv)"
+[ -f /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # jenv
 export PATH="$PATH:$HOME/.jenv/bin"
@@ -203,9 +203,9 @@ export PATH=$PATH:/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/R
 # https://github.com/moovweb/gvm
 # gvm install go1.16.15
 # gvm use go1.16.15 --default
-source $HOME/.gvm/scripts/gvm
+[[ -s $HOME/.gvm/scripts/gvm ]] && source $HOME/.gvm/scripts/gvm
 # export GOPATH=$HOME/go
-export PATH=$PATH:$(go env GOPATH)/bin
+which go > /dev/null && export PATH=$PATH:$(go env GOPATH)/bin
 # 需要设置 GoLand 的 GOROOT 和 GOPATH 值
 # -
 # goland command line
@@ -215,16 +215,18 @@ export PATH=$PATH:/Applications/GoLand.app/Contents/MacOS
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 
 # Python
-# pyenv 使用 homebrew 安装
+# brew install pyenv
+# pyenv install 2
+# brew install --HEAD pyenv-virtualenv
 # https://github.com/pyenv/pyenv#homebrew-in-macos
 # https://github.com/pyenv/pyenv-virtualenv
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+which pyenv > /dev/null && eval "$(pyenv init -)"
+which pyenv > /dev/null && eval "$(pyenv virtualenv-init -)"
 
 # Java
 # jenv
 export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+which jenv > /dev/null && eval "$(jenv init -)"
 # brew install java
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
@@ -353,7 +355,7 @@ export PATH=$HOME/bin:$PATH
 
 # emsdk: https://emscripten.org/docs/getting_started/downloads.html
 export EMSDK_QUIET=1
-source $HOME/git-source/github.com/emscripten-core/emsdk/emsdk_env.sh
+[ -f $HOME/git-source/github.com/emscripten-core/emsdk/emsdk_env.sh ] && source $HOME/git-source/github.com/emscripten-core/emsdk/emsdk_env.sh
 
 
 # rz/sz
