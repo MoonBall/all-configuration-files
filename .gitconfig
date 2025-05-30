@@ -1,7 +1,7 @@
 [core]
         pager = less -FRX
         # git config --global core.excludesfile ~/.gitignore_global
-        excludesfile = ~/.gitignore_global
+	excludesfile = /Users/bytedance/.gitignore_global
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
@@ -23,6 +23,11 @@
 	spush = push --recurse-submodules=on-demand
 	supdate = submodule update --remote --merge
 [url "https://"]
-	insteadOf = git://
+        insteadOf = git://
 [url "ssh://"]
 	insteadOf = https://
+[user]
+	name = chengang.07
+	email = chengang.07@bytedance.com
+[commit]
+	template = /Users/bytedance/.stCommitMsg

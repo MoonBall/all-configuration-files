@@ -155,11 +155,11 @@ function load-nvm {
   load-nvmrc
 }
 if [[ "x${TERM_PROGRAM}" = "xvscode" ]]; then 
-  load-nvm
+  [ -s "$HOME/.nvm/nvm.sh" ] && load-nvm
   # 现在又不复现问题了，所以直接执行 load-nvm
   # echo 'in vscode, nvm not work; use `load-nvm`';
 else 
-  load-nvm
+  [ -s "$HOME/.nvm/nvm.sh" ] && load-nvm
 fi
 
 # origin npm registry
@@ -213,15 +213,6 @@ export PATH=$PATH:/Applications/GoLand.app/Contents/MacOS
 
 # Postgres.app
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
-
-# Python
-# brew install pyenv
-# pyenv install 2
-# brew install --HEAD pyenv-virtualenv
-# https://github.com/pyenv/pyenv#homebrew-in-macos
-# https://github.com/pyenv/pyenv-virtualenv
-which pyenv > /dev/null && eval "$(pyenv init -)"
-which pyenv > /dev/null && eval "$(pyenv virtualenv-init -)"
 
 # Java
 # jenv
@@ -368,7 +359,17 @@ export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 # curl https://sh.rustup.rs -sSf | sh
 [ -f $HOME/.cargo/env ] && source "$HOME/.cargo/env"
 
+# Python, brew install uv, https://docs.astral.sh/uv/getting-started/installation/#homebrew
+which uv > /dev/null && eval "$(uv generate-shell-completion zsh)"
+which uvx > /dev/null && eval "$(uvx --generate-shell-completion zsh)"
+
+
 
 # 允许执行公司内的一些特殊配置
 [ -f ~/.company-inner.sh ] && . ~/.company-inner.sh
 
+
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
